@@ -89,6 +89,11 @@ impl TfoStream {
     pub fn set_ttl(&self, ttl: u32) -> io::Result<()> {
         self.inner.set_ttl(ttl)
     }
+
+    #[inline]
+    pub fn inner(&self) -> &TokioTcpStream {
+        &*self.inner
+    }
 }
 
 impl AsyncRead for TfoStream {
