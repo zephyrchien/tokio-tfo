@@ -91,8 +91,8 @@ impl TfoStream {
     }
 
     #[inline]
-    pub fn inner(&self) -> &TokioTcpStream {
-        &*self.inner
+    pub fn inner(&mut self) -> &TokioTcpStream {
+        self.inner.as_mut()
     }
 }
 

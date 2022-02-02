@@ -176,6 +176,12 @@ impl From<TokioTcpStream> for TcpStream {
     }
 }
 
+impl AsMut<TokioTcpStream> for TcpStream {
+    fn as_mut(&mut self) -> &mut TokioTcpStream {
+        Pin::new(&mut self.stream).connected().get_mut()
+    }
+}
+
 impl AsyncRead for TcpStream {
     fn poll_read(self: Pin<&mut Self>, cx: &mut task::Context<'_>, buf: &mut ReadBuf<'_>) -> Poll<io::Result<()>> {
         let this = self.project();
